@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Shea Sepherd</title>
+</h:head>
+<h:body>
+    <h:form id="form-melden">
+        <h1>Geisternetz hinzufügen oder als verschollen melden</h1>
+        
+        <p:panelGrid columns="2" style="width: 50%">
+                <p:outputLabel value="Nutzername" for="nutzername" />
+                <p:outputLabel value="Telefonnummer" for="telefonnummer"/>
+                
+                <p:inputText id="nutzername" value="#{meldeController.person.nutzername}" required="true" size="25"/>
+                <p:inputText id="telefonnummer" value="#{meldeController.person.telefonnummer}" required="#{meldeController.telefonnummerErforderlich}" size="25"
+                	validatorMessage="Ungültige Telefonnummer. Ländervorwahl durch z.B. 0049xxxxxx">
+                	<f:validateRegex pattern="^\d+$" />
+                </p:inputText>
+        </p:panelGrid>
+        <p>
+        <h:message for="telefonnummer" style="color: red;" />        
+        </p>
+        
+        <!-- Starte TabView -->
+        <p:tabView>
+            
+            <p:tab title="Neues Netz">
+                <p class="m-0">
+                    
+        <!-- Details um Netz hinzuzufügen -->
+        <p:card style="width: 50rem; margin-bottom: 2em">
+            <f:facet name="title">
+                Details
+            </f:facet>
+			<p>
+			<h:outputLink value="https://www.google.com/maps" target="_blank">
+    			Google Maps öffnen
+			</h:outputLink>
+			</p>
+            <p:panelGrid columns="2" style="width: 100%">
+                <p:outputLabel value="Latitude:" for="latitude"/>
+                <p:inputText id="latitude" value="#{meldeController.geisternetz.latitude}" 
+                	required="#{meldeController.speicherButtonClicked}" size="25"/>
+
+                <p:outputLabel value="Longitude:" for="longitude"/>
+                <p:inputText id="longitude" value="#{meldeController.geisternetz.longitude}" 
+                	required="#{meldeController.speicherButtonClicked}" size="25"/>
+
+                <p:outputLabel value="Größe (in qm, 1 - 500):" for="groesse"/>
+                <p:inputText id="groesse" value="#{meldeController.geisternetz.geschaetzteGroesse}" 
+                	required="#{meldeController.speicherButtonClicked}"/>
+            </p:panelGrid>
+            <p>
+            <h:messages style="color: red; font-size: 14xp;">
+            	<p:autoUpdate/>
+            </h:messages>
+            </p>
+				<br/>
+            <p:commandButton icon="pi pi-save"
+            				 value="Daten speichern und Netz melden"
+                             action="#{meldeController.speicherePersonUndNetz}"
+                             update="form-melden"
+                             styleClass="rounded-button" >
+            <p:ajax event="click" listener="#{meldeController.requiredFuerSpeichern}" process="@this" />
+			</p:commandButton>
+               
+        </p:card>     
+		 	<p:commandButton value="Abbrechen"
+                 action="#{meldeController.index}"
+                 process="@this"
+                 styleClass="rounded-button" />		
+                </p>
+            </p:tab>
+         
+         <!-- Netze anzeigen und als verschollen melden -->
+            <p:tab title="Netz verschollen">                
+                <p class="m-0">
+                   
+                   <p:dataTable id="datatable-verschollen" var="netz" value="#{meldeController.geisternetze}" >
+	    <p:column headerText="Meldende Person">
+	                <h:outputText value="#{netz.melder.nutzername}" />
+	            </p:column>
+	    <p:column headerText="Latitude">
+	                <h:outputText value="#{netz.latitude}" />
+	            </p:column>
+	    <p:column headerText="Longitude">
+	                <h:outputText value="#{netz.longitude}" />
+	            </p:column>
+	    <p:column headerText="Größe (geschätzt)">
+	                <h:outputText value="#{netz.geschaetzteGroesse}" />
+	            </p:column>
+	    <p:column headerText="Als verschollen melden">
+	                <p:commandButton value="verschollen"
+	                				 action="#{meldeController.netzVerschollen(netz)}"
+	                				 update="@form"
+	                				 styleClass="ui-button-danger">
+	                 <p:ajax event="click" listener="#{meldeController.requiredFuerVerschollen}" process="@this" />
+					</p:commandButton>
+	                
+	            </p:column>
+	</p:dataTable>
+	</p>
+	<p>
+	<p:commandButton value="Abbrechen"
+                 action="#{meldeController.index}"
+                 process="@this"
+                 styleClass="rounded-button" />
+	</p>
+                   
+              
+               
+            </p:tab>
+            
+		</p:tabView>
+		
+		
+    </h:form>
+    <p><i>Nutzername und Telefonnummer werden gespeichert</i></p>
+</h:body>
+</html>

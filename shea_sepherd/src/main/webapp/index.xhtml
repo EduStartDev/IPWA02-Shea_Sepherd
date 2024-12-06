@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Shea Sepherd</title>
+   	<style>
+   		body {
+   			font-family: 'Lato', sans-serif;
+   		}
+        h1 {
+            text-align: center;
+        }
+        #start-layout {
+            margin: 20px auto;
+            max-width: 90vw;
+        }
+        #text, #text-melden, #text-bergen {         
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        #navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+    </style>
+</h:head>
+<h:body>
+<h1>Shea Sepherds</h1>
+
+<div id="start-layout">
+<div id="text">
+	<p>Unsere Weltmeere sind essenziell für das Leben auf der Erde – <br/>
+	sie produzieren mehr als 50 % des Sauerstoffs, regulieren das Klima und bieten Lebensraum für unzählige Tier- und Pflanzenarten.<br/>
+	Doch Verschmutzung bedroht dieses fragile Ökosystem massiv. <br/>
+	Insbesondere herrenlose Fischernetze, auch als Geisternetze bekannt, stellen eine ernste Gefahr dar.<br/>
+	<br/>
+	Diese Netze, die oft aus langlebigem Kunststoff bestehen, treiben unkontrolliert im Meer, <br/>
+	fangen Fische, Meeressäuger und Schildkröten ein <br/>
+	und verursachen qualvolles Verenden. Zudem tragen sie zur Mikroplastikbelastung bei, <br/>
+	die sich durch die Nahrungskette bis zum Menschen auswirkt. <br/>
+	Das Bergen und Beseitigen dieser Netze ist daher entscheidend, <br/>
+	um die Meeresbewohner zu schützen, die Artenvielfalt zu bewahren und die Gesundheit unseres Planeten langfristig zu sichern. <br/>
+	Saubere Ozeane sind eine Grundvoraussetzung für eine nachhaltige Zukunft.
+	</p>
+</div>
+
+<h:form>
+
+<div id="navigation">
+<div id="text-melden">
+<p>Du hast ein neues Geisternetz umherschwimmen sehen und möchtest es melden?<br/>
+Oder du hast festgestellt, dass an der gemeldeten Stelle kein Netz mehr auffindbar ist?</p>
+<p:commandButton value="Netz melden" 
+				 action="#{startseiteController.netzMelden}"
+				 styleClass="rounded-button"/>
+</div>
+
+<div id="text-bergen">
+<p>Du beteiligst dich aktiv an der Rettung der Meere und möchtest ein Geisternetz bergen?<br/>
+Melde dich an um verfügbare Netze und dein Dashboard aufzurufen</p>
+<p:commandButton value="Netz bergen" 
+				 action="#{startseiteController.loginSeite}" 
+				 ajax="false"
+				 styleClass="rounded-button"/>
+</div>
+</div>
+</h:form>
+</div>
+</h:body>
+</html>

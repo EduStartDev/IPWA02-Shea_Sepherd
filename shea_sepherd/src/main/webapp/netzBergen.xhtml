@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Shea Sepherd</title>
+</h:head>
+<h:body>
+<h1>Gemeldete und zu bergende Netze</h1>
+
+<h:form>
+<h3>Willkommen, <h:outputText value="#{bergeController.berger.nutzername}"/></h3>
+
+<!-- Starte TabView -->
+	<p:tabView>
+		<p:tab title="Gemeldete Netze">
+		<p class="m-0">                    
+        <p:card style="width: 75vw; margin-bottom: 2em">
+            <f:facet name="title">
+                Gemeldete Netze
+            </f:facet>
+            
+             <p:dataTable id="datatable-gemeldete" var="netz" value="#{bergeController.gemeldeteNetze}" >
+	    <p:column headerText="Name">
+	                <h:outputText value="#{netz.melder.nutzername}" />
+	            </p:column>
+	    <p:column headerText="Telefonnummer">
+	                <h:outputText value="#{netz.melder.telefonnummer}" />
+	            </p:column>
+	    <p:column headerText="Latitude">
+	                <h:outputText value="#{netz.latitude}" />
+	            </p:column>
+	    <p:column headerText="Longitude">
+	                <h:outputText value="#{netz.longitude}" />
+	            </p:column>
+	    <p:column headerText="Geschätzte Größe">
+	                <h:outputText value="#{netz.geschaetzteGroesse}" />
+	            </p:column>
+	    <p:column headerText="Für Bergung anmelden">
+	                <p:commandButton value="bergen"
+	                				 action="#{bergeController.netzBergen(netz)}"
+	                				 update="@form"
+	                				 styleClass="ui-button-success"/>                
+	            </p:column>
+	</p:dataTable>
+		</p:card>
+		</p>
+		</p:tab>
+	<!-- Zweiter Tab -->
+		<p:tab title="Angemeldete Netze">
+		<p class="m-0">                    
+
+        <p:card style="width: 75vw; margin-bottom: 2em">
+            <f:facet name="title">
+                Zur Bergung angemeldete Netze
+            </f:facet>
+                <p:dataTable id="datatable-zu-bergende" var="netz" value="#{bergeController.zuBergendeNetze}" >
+        <p:column headerText="Name">
+	                <h:outputText value="#{netz.melder.nutzername}" />
+	            </p:column>
+	    <p:column headerText="Telefonnummer">
+	                <h:outputText value="#{netz.melder.telefonnummer}" />
+	            </p:column>
+	    <p:column headerText="Latitude">
+	                <h:outputText value="#{netz.latitude}" />
+	            </p:column>
+	    <p:column headerText="Longitude">
+	                <h:outputText value="#{netz.longitude}" />
+	            </p:column>
+	    <p:column headerText="Geschätzte Größe">
+	                <h:outputText value="#{netz.geschaetzteGroesse}" />
+	            </p:column>
+	    <p:column headerText="Netz als geborgen melden">
+	                <p:commandButton value="geborgen"
+	                				 action="#{bergeController.netzGeborgenMelden(netz)}"
+	                				 update="@form"
+	                				 styleClass="ui-button-success"/>                
+	            </p:column>
+	    <p:column headerText="Netz als verschollen melden">
+	                <p:commandButton value="verschollen"
+	                				 action="#{bergeController.netzVerschollenMelden(netz)}"
+	                				 update="@form"
+	                				 styleClass="ui-button-danger"/>                
+	            </p:column>
+	</p:dataTable>       
+		</p:card>
+		</p>
+		</p:tab>
+	</p:tabView>
+
+<p:commandButton value="Ausloggen"
+                 action="#{bergeController.logout}"
+                 process="@this"
+                 styleClass="rounded-button ui-button-danger" />
+</h:form>	
+</h:body>
+</html>

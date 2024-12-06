@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Shea Sepherd</title>
+</h:head>
+<h:body>
+			<h:form id="authForm">
+	<p:card style="width: 30em">
+        <h2>Geisternetz bergen - Anmeldung</h2>
+
+        <p:panelGrid columns="2" style="width: 50%">
+            <p:outputLabel value="Nutzername:" for="nutzername"/>
+            <p:inputText id="nutzername" value="#{authController.person.nutzername}" required="true" size="25"/>
+
+            <p:outputLabel value="Telefonnummer:" for="telefonnummer"/>
+            <p:inputText id="telefonnummer" value="#{authController.person.telefonnummer}" required="true" size="25"/>
+        </p:panelGrid>
+        <p>
+			<h:messages style="color: red; font-size: 16px;"/>            	
+		</p>
+        <br/>
+
+        <p:commandButton value="Anmelden"
+                         action="#{authController.anmelden}"
+                         update="@form"
+                         styleClass="rounded-button"/>
+
+        <p:commandButton icon="pi pi-save"
+        				 value="Hinzufügen und Anmelden"
+                         action="#{authController.hinzufuegenUndAnmelden}"
+                         update="@form"
+                         styleClass="rounded-button"/>
+	</p:card>
+		
+		<p>
+		<p:commandButton value="Abbrechen"
+                 action="#{authController.index}"
+                 process="@this"
+                 styleClass="rounded-button" />
+        </p>
+    </h:form>
+    
+</h:body>
+</html>
