@@ -8,6 +8,6 @@ IPWA02-01 Aufgabe 3: Shea Sepherd - Geisternetze melden und bergen
 - Servlet-Container: Apache Tomcat
 
 # Einrichtung
-- Ggf. Datenbank anpassen und Passwort ergänzen
+- Ggf. persistence.xml anpassen und Passwort ergänzen
 - SQL-Dump zur Initialisierung der Datenbank ausführen
 - Unter **Nutzername**: "TestPerson" und **Telefonnummer**: "1234" sind für Testzwecke Daten hinterlegt
